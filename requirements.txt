@@ -1,0 +1,20 @@
+# Asisten Pribadi Berbasis Perintah Bahasa Indonesia
+# Dependencies — menggunakan Groq sebagai LLM provider (GRATIS)
+
+# ─── LLM Provider (Groq) ──────────────────────────────────────────
+langchain-groq>=0.1.9
+
+# ─── LangChain Core ───────────────────────────────────────────────
+langchain>=0.3.0
+langchain-core>=0.3.0
+langchain-community>=0.3.0
+
+# ─── LangGraph ────────────────────────────────────────────────────
+langgraph>=0.2.0
+
+# ─── LangSmith ────────────────────────────────────────────────────
+langsmith>=0.1.77
+
+# ─── Utilities ────────────────────────────────────────────────────
+python-dotenv>=1.0.0
+flask>=3.0.0
