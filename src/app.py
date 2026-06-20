@@ -1,10 +1,3 @@
-"""
-app.py — Web UI untuk ARIA
-Flask server yang menyajikan antarmuka chat berbasis web.
-Jalankan: python src/app.py
-Buka: http://localhost:5000
-"""
-
 import os
 import json
 from datetime import datetime
@@ -13,13 +6,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Import komponen asisten (pastikan asisten.py ada di folder yang sama)
+# Import komponen asisten
 import sys
 sys.path.insert(0, os.path.dirname(__file__))
 
 app = Flask(__name__)
 
-# ─── Lazy-load asisten agar Flask start dulu ──────────────────────
+# Lazy-load asisten agar Flask start
 _asisten = None
 
 def get_asisten():
@@ -30,7 +23,6 @@ def get_asisten():
     return _asisten
 
 
-# ─── HTML Template ────────────────────────────────────────────────
 HTML = r"""<!DOCTYPE html>
 <html lang="id">
 <head>

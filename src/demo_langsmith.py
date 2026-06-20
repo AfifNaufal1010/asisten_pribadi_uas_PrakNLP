@@ -1,16 +1,3 @@
-"""
-demo_langsmith.py
-=================
-Demonstrasi eksplisit penggunaan LangSmith untuk:
-1. Membuat dataset evaluasi
-2. Menjalankan evaluasi otomatis
-3. Melihat trace percakapan
-4. Membandingkan performa run
-
-LangSmith digunakan untuk monitoring, tracing, dan evaluasi
-sistem asisten berbasis Bahasa Indonesia.
-"""
-
 import os
 from datetime import datetime
 from langsmith import Client
@@ -33,7 +20,7 @@ def demonstrasi_langsmith():
     print("Monitoring & Evaluasi Asisten Bahasa Indonesia")
     print("=" * 60)
     
-    # ─── 1. Inisialisasi Client ────────────────────────────────────
+    # 1. Inisialisasi Client 
     print("\n1️⃣  Menginisialisasi LangSmith Client...")
     
     api_key = os.environ.get("LANGCHAIN_API_KEY")
@@ -56,7 +43,7 @@ def demonstrasi_langsmith():
         demo_simulasi()
         return
     
-    # ─── 2. Membuat Dataset Evaluasi ──────────────────────────────
+    #  2. Membuat Dataset Evaluasi 
     print("\n2️⃣  Membuat dataset evaluasi...")
     
     nama_dataset = f"evaluasi-asisten-id-{datetime.now().strftime('%Y%m%d-%H%M')}"
@@ -94,7 +81,7 @@ def demonstrasi_langsmith():
     except Exception as e:
         print(f"   ⚠️  Gagal membuat dataset: {e}")
     
-    # ─── 3. Tracing Percakapan ────────────────────────────────────
+    # 3. Tracing Percakapan 
     print("\n3️⃣  Menjalankan percakapan dengan tracing aktif...")
     
     llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0.7)

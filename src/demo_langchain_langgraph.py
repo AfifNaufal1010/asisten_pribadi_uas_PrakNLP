@@ -1,8 +1,5 @@
 """
-demo_langchain_langgraph.py
-============================
 Demonstrasi eksplisit komponen-komponen utama:
-
 LANGCHAIN:
 - ChatPromptTemplate
 - ConversationBufferMemory
@@ -20,7 +17,7 @@ import os
 from typing import TypedDict, Annotated, List
 import operator
 
-# ─── LangChain ────────────────────────────────────────────────────────────────
+# LangChain 
 from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 load_dotenv()
@@ -30,7 +27,7 @@ from langchain_core.tools import tool
 from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.chat_history import BaseChatMessageHistory
 
-# ─── LangGraph ────────────────────────────────────────────────────────────────
+# LangGraph 
 from langgraph.graph import StateGraph, END
 
 print("=" * 60)
@@ -39,9 +36,7 @@ print("Asisten Pribadi Berbasis Perintah Bahasa Indonesia")
 print("=" * 60)
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # BAGIAN 1: LANGCHAIN — Prompt Templates
-# ══════════════════════════════════════════════════════════════════════════════
 
 print("\n📦 LANGCHAIN — ChatPromptTemplate")
 print("-" * 40)
@@ -60,7 +55,7 @@ print("   • System message dengan variable {tanggal}")
 print("   • Placeholder untuk chat_history (multi-turn)")
 print("   • Human message dengan {perintah}")
 
-# Contoh format prompt
+# format prompt
 from datetime import datetime
 contoh_prompt = prompt_template.format_messages(
     tanggal=datetime.now().strftime("%d %B %Y"),
@@ -77,9 +72,7 @@ for msg in contoh_prompt:
     print(f"   [{tipe}]: {isi}")
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # BAGIAN 2: LANGCHAIN — Memory
-# ══════════════════════════════════════════════════════════════════════════════
 
 print("\n\n📦 LANGCHAIN — ChatMessageHistory (Conversation Memory)")
 print("-" * 40)
@@ -101,9 +94,7 @@ print(f"   • Prefix human: 'Pengguna' | Prefix AI: 'ARIA'")
 print(f"   • Pesan pertama: '{riwayat[0].content}'")
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # BAGIAN 3: LANGCHAIN — Tools
-# ══════════════════════════════════════════════════════════════════════════════
 
 print("\n\n📦 LANGCHAIN — Tool Definitions")
 print("-" * 40)
@@ -185,9 +176,7 @@ else:
     print("\n   ⚠️  OPENAI_API_KEY tidak ditemukan — binding tools dilewati")
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # BAGIAN 4: LANGGRAPH — StateGraph
-# ══════════════════════════════════════════════════════════════════════════════
 
 print("\n\n📦 LANGGRAPH — StateGraph dengan Conditional Edges")
 print("-" * 40)

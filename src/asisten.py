@@ -1,20 +1,3 @@
-"""
-Asisten Pribadi Berbasis Perintah Bahasa Indonesia
-===================================================
-Sistem asisten cerdas yang menerima perintah dalam Bahasa Indonesia
-menggunakan LangChain, LangGraph, dan LangSmith.
-
-LLM Provider: Groq (gratis, cepat)
-Model       : llama-3.3-70b-versatile
-
-Fitur:
-- Memahami perintah Bahasa Indonesia secara natural
-- Multi-turn conversation memory
-- Routing cerdas berdasarkan jenis perintah (LangGraph)
-- Monitoring & tracing via LangSmith
-- Tools: kalkulator, pengingat, waktu, informasi
-"""
-
 import os
 from datetime import datetime
 from typing import TypedDict, Annotated, List
@@ -24,28 +7,26 @@ from dotenv import load_dotenv
 # Load .env
 load_dotenv()
 
-# ─── LangChain + Groq ─────────────────────────────────────────────────────────
+# LangChain + Groq 
 from langchain_groq import ChatGroq
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.tools import tool
 
-# ─── LangGraph ────────────────────────────────────────────────────────────────
+# LangGraph 
 from langgraph.graph import StateGraph, END
 from langgraph.prebuilt import ToolNode
 
-# ─── LangSmith ────────────────────────────────────────────────────────────────
+# LangSmith 
 from langsmith import Client as LangSmithClient
 
-# ─── Konfigurasi LangSmith ────────────────────────────────────────────────────
+# Konfigurasi LangSmith 
 os.environ.setdefault("LANGCHAIN_TRACING_V2", "true")
 os.environ.setdefault("LANGCHAIN_PROJECT", "asisten-pribadi-bahasa-indonesia")
 
 
-# ══════════════════════════════════════════════════════════════════════════════
-# TOOLS
-# ══════════════════════════════════════════════════════════════════════════════
 
+# TOOLS
 @tool
 def kalkulator(ekspresi: str) -> str:
     """
@@ -126,9 +107,7 @@ TOOLS = [
     informasi_umum
 ]
 
-# ══════════════════════════════════════════════════════════════════════════════
 # STATE
-# ══════════════════════════════════════════════════════════════════════════════
 
 class AsistenState(TypedDict):
     messages:          Annotated[List, operator.add]
@@ -137,9 +116,7 @@ class AsistenState(TypedDict):
     respons_akhir:     str
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # LLM (GROQ)
-# ══════════════════════════════════════════════════════════════════════════════
 
 def buat_llm(temperature: float = 0.7) -> ChatGroq:
     """Inisialisasi model Groq — llama-3.1-8b-instant."""
@@ -180,9 +157,7 @@ Perintah: "{perintah}"
 Jawab HANYA dengan satu kata: tool, percakapan, atau selesai."""
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # NODE-NODE LANGGRAPH
-# ══════════════════════════════════════════════════════════════════════════════
 
 def node_klasifikasi(state: AsistenState) -> AsistenState:
     """Node: mengklasifikasikan jenis perintah pengguna."""
@@ -284,9 +259,7 @@ def routing_logic(state: AsistenState) -> str:
     else:                    return "percakapan"
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # MEMBANGUN GRAPH
-# ══════════════════════════════════════════════════════════════════════════════
 
 def buat_graph() -> StateGraph:
     """
@@ -314,9 +287,7 @@ def buat_graph() -> StateGraph:
     return graph.compile()
 
 
-# ══════════════════════════════════════════════════════════════════════════════
 # KELAS UTAMA
-# ══════════════════════════════════════════════════════════════════════════════
 
 class AsistenPribadi:
     """
