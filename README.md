@@ -108,8 +108,8 @@ Manfaat LangSmith:
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/USERNAME/uas-nlp-aria.git
-cd uas-nlp-aria
+git clone https://github.com/AfifNaufal1010/asisten_pribadi_uas_PrakNLP.git
+cd asisten_pribadi_uas_PrakNLP
 ```
 
 ### 2. Install Dependency
